@@ -11,7 +11,7 @@ if [ -x "$(which apk 2>/dev/null)" ]
     then
         apk add --no-cache git gcc make musl-dev autoconf automake libtool ninja \
             linux-headers bash meson cmake pkgconfig libcap-static libcap-dev \
-            libselinux-dev libxslt bash-completion
+            libselinux-dev libxslt bash-completion xz
 fi
 
 if [ -d build ]
@@ -58,7 +58,7 @@ cc -o bwrap bwrap.p/bubblewrap.c.o bwrap.p/bind-mount.c.o bwrap.p/network.c.o bw
 cd ../..
 
 echo "= extracting bubblewrap binary"
-mv build/bubblewrap-${bubblewrap_version}/bwrap release 2>/dev/null
+mv build/bubblewrap-${bubblewrap_version}/build/bwrap release 2>/dev/null
 
 echo "= striptease"
 strip -s -R .comment -R .gnu.version --strip-unneeded release/bwrap 2>/dev/null
