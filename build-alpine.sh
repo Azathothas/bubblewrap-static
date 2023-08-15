@@ -29,7 +29,7 @@ fi
 # create build and release directory
 mkdir build
 mkdir release
-pushd build
+cd build
 
 # download bubblewrap
 git clone https://github.com/containers/bubblewrap.git
@@ -47,7 +47,7 @@ if [ "$platform" == "Linux" ]
 fi
 
 echo "= building bubblewrap"
-pushd bubblewrap-${bubblewrap_version}
+cd bubblewrap-${bubblewrap_version}
 meson build
 ninja -C build bwrap.p/bubblewrap.c.o bwrap.p/bind-mount.c.o bwrap.p/network.c.o bwrap.p/utils.c.o
 (
@@ -55,11 +55,7 @@ cd build && \
 cc -o bwrap bwrap.p/bubblewrap.c.o bwrap.p/bind-mount.c.o bwrap.p/network.c.o bwrap.p/utils.c.o \
     -static -L/usr/lib -lcap -lselinux
 )
-popd # bubblewrap-${bubblewrap_version}
-
-popd # build
-
-shopt -s extglob
+cd ../..
 
 echo "= extracting bubblewrap binary"
 mv build/bubblewrap-${bubblewrap_version}/bwrap release 2>/dev/null
