@@ -71,7 +71,7 @@ fi
 
 echo "= create release tar.xz"
 tar --xz -acf bubblewrap-static-v${bubblewrap_version}-${platform_arch}.tar.xz release
-# cp bubblewrap-static-*.tar.xz ~/ 2>/dev/null
+mv -f bubblewrap-static-*.tar.xz ~/ 2>/dev/null
 
 if [ "$NO_CLEANUP" != 1 ]
     then
